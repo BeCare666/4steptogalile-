@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Galileecommerce</title>
+    <style>
+        /* Reset léger */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Conteneur pleine hauteur avec image de fond */
+        .hero {
+            min-height: 100vh;
+            height: 100vh;
+            width: 100%;
+            background-image: url('./img/pcimag\ \(1\).jpg');
+            /* Remplace l'URL ci-dessous par ta propre image */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #fff;
+        }
+
+        /* Overlay sombre pour lisibilité */
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+        }
+
+        /* Bouton centré, fixe au milieu */
+        .download-btn {
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            /* espace avec le bas de l’écran */
+            transform: translateX(-50%);
+            /* centré horizontalement */
+            z-index: 10;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            color: #0b1220;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(8, 12, 20, 0.45);
+            transition: transform .12s ease, box-shadow .12s ease;
+            border: none;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            -webkit-tap-highlight-color: transparent;
+            max-width: 90%;
+            /* ✅ limite la taille sur petits écrans */
+            flex-wrap: wrap;
+            /* ✅ permet au texte de passer à la ligne si écran étroit */
+            text-align: center;
+        }
+
+        /* Responsive : bouton plus petit sur mobile */
+        @media (max-width: 600px) {
+            .download-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+                gap: 8px;
+                max-width: 100%;
+                flex-wrap: nowrap;
+            }
+
+            .hero {
+                min-height: 100vh;
+                height: 100vh;
+                width: 100%;
+                background-image: url('./img/pcimag\ \(2\).jpg');
+                /* Remplace l'URL ci-dessous par ta propre image */
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                color: #fff;
+            }
+        }
+
+
+        .download-btn:hover {
+            transform: translate(-50%, -50%) scale(1.03);
+            box-shadow: 0 14px 30px rgba(8, 12, 20, 0.55);
+        }
+
+        .download-btn:active {
+            transform: translate(-50%, -50%) scale(0.99);
+        }
+
+        /* Icône SVG taille */
+        .download-icon {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        /* Texte du bouton (responsive) */
+        .download-text {
+            font-size: 15px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        /* Petite note en bas */
+        .note {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            z-index: 9;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .download-btn {
+                padding: 12px 14px;
+                gap: 8px;
+            }
+
+            .download-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="hero" role="main" aria-label="Page de téléchargement ebook">
+        <!-- Bouton : j'utilise un <button> pour actions JS (accessible) 
+        <button id="downloadBtn" class="download-btn" aria-label="Télécharger l'ebook">
+            <!-- SVG icône de téléchargement -->
+        <!--  <svg class="download-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true" focusable="false">
+                <path d="M12 3v12" stroke="#0b1220" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 11l4 4 4-4" stroke="#0b1220" stroke-width="1.6" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <rect x="3.5" y="17.5" width="17" height="2.5" rx="0.6" fill="#0b1220" />
+            </svg>
+
+            <span class="download-text">Cliquer ici pour télécharger l'ebook</span>
+        </button>
+        -->
+    </main>
+
+    <script>
+        // Option 1: si tu veux fournir un lien déjà hébergé : mets l'URL dans downloadLink et la variable useHosted=true
+        const useHosted = false;
+        const downloadLink = "https://example.com/ton-ebook.pdf"; // <-- remplacer si useHosted=true
+
+        // Si tu veux générer un fichier local (ex: demo), il créera ebook.txt.
+        document.getElementById('downloadBtn').addEventListener('click', async function (e) {
+            if (useHosted) {
+                // Téléchargement direct d'une URL (nécessite CORS si cross-origin)
+                const a = document.createElement('a');
+                a.href = downloadLink;
+                a.download = downloadLink.split('/').pop() || 'ebook.pdf';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                return;
+            }
+
+            // Génère un fichier texte simple (démo). Remplace par du vrai contenu ou adapte pour un PDF.
+            const contenu = [
+                "Titre: Mon super Ebook",
+                "Auteur: Ton nom",
+                "",
+                "Contenu:",
+                "Bienvenue dans ce petit ebook de démonstration.",
+                "Remplace ce texte par le contenu réel de ton ebook ou héberge un vrai PDF et active useHosted."
+            ].join("\\n");
+
+            const blob = new Blob([contenu], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ebook.txt'; // nom du fichier ; change en ebook.pdf si tu fournis un vrai PDF
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            // Libération de l'URL objet
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+    </script>
+</body>
+
+</html>
