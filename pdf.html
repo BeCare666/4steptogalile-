@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>PDF en Base64</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
     }
+
     textarea {
       width: 100%;
       height: 200px;
@@ -16,6 +19,7 @@
       font-size: 12px;
       white-space: pre-wrap;
     }
+
     button {
       margin-top: 10px;
       padding: 10px 15px;
@@ -25,11 +29,13 @@
       cursor: pointer;
       border-radius: 5px;
     }
+
     button:hover {
       background: #45a049;
     }
   </style>
 </head>
+
 <body>
   <h2>Convertir PDF en Base64</h2>
   <input type="file" id="pdfInput" accept="application/pdf">
@@ -37,14 +43,14 @@
   <button onclick="copyBase64()">Copier le Base64</button>
 
   <script>
-    document.getElementById("pdfInput").addEventListener("change", function(event) {
+    document.getElementById("pdfInput").addEventListener("change", function (event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
-          const base64String = e.target.result.split(",")[1]; 
+        reader.onload = function (e) {
+          const base64String = e.target.result.split(",")[1];
           document.getElementById("output").value = base64String;
-          console.log("Base64 PDF:", base64String); 
+          console.log("Base64 PDF:", base64String);
         };
         reader.readAsDataURL(file);
       }
@@ -58,4 +64,5 @@
     }
   </script>
 </body>
+
 </html>
