@@ -228,7 +228,7 @@
             e.preventDefault();
 
             try {
-                const response = await fetch('./img/Présentation_des_étapes_phares_du_lancement_de_Galileeecommerce.pdf');
+                const response = await fetch('./img/Présentation_des_étapes_phares_du_lancement_de_Galileeecommerce_.pdf');
                 if (!response.ok) throw new Error("Fichier introuvable !");
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);

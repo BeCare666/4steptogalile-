@@ -42,7 +42,7 @@
         }
 
         .background {
-            background: #05324a url("./img/Image4.png") no-repeat center;
+            background: #05324a url("./img/let's_goo.png") no-repeat center;
             background-size: contain;
         }
 
@@ -130,7 +130,7 @@
 <body>
     <!-- Écrans -->
     <div class="screen background active"></div>
-
+ <!-- Écrans 
     <div class="screen text-screen">
         <h1>Lancement des évènements phares de galileecommerce.com</h1>
         <img src="./img/Image1.png" alt="Logo Galiléecommerce">
@@ -139,9 +139,9 @@
     <div class="screen image-screen">
         <img src="./img/allons.jpg" alt="Évènement 1">
     </div>
-
+-->
     <div class="screen final-screen">
-        <img id="finalImage" src="./img/steps.png" alt="Évènement 2">
+        <img id="finalImage" src="./img/new_steps.png" alt="Évènement 2">
         <button id="moreBtn">CLIQUER ICI POUR EN SAVOIR PLUS</button>
     </div>
 
@@ -176,7 +176,7 @@
                 // 👉 Premier clic : fade out + remplacement image
                 finalImg.style.opacity = "0";
                 setTimeout(() => {
-                    finalImg.src = "./img/message.jpg"; // mets ta nouvelle image ici
+                    finalImg.src = "./img/message_lancement.png"; // mets ta nouvelle image ici
                     finalImg.style.opacity = "1"; // fade in
                 }, 1000); // durée du fade out
             } else if (clickCount === 2) {
