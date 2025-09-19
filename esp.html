@@ -102,6 +102,7 @@
             left: 0;
             width: 100%;
             /* pleine largeur */
+            height:106px;
             background: #ff3e3f;
             color: #fff;
             text-align: center;
@@ -151,6 +152,41 @@
                 font-size: 18px;
             }
         }
+        /* --- PRELOADER --- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #05324a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Loader animé épuré */
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid #FFD700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
     </style>
 </head>
 
@@ -170,7 +206,10 @@
         <span class="arrow">↑</span>
 
     </div>
- 
+ <!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader"></div>
+</div>
     <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
     <script>
@@ -189,7 +228,10 @@
         pdfjsLib.getDocument({ data: pdfData }).promise.then(function (pdf) {
             pagesToShow.forEach(pageNum => {
                 if (pageNum <= pdf.numPages) { // Vérifie que la page existe
+                   
                     pdf.getPage(pageNum).then(function (page) {
+                         const preloader = document.getElementById("preloader");
+                    preloader.classList.add("hide");
                         const scale = 1.5;
                         const viewport = page.getViewport({ scale: scale });
 
@@ -206,6 +248,7 @@
                             viewport: viewport
                         }).promise.then(() => {
                             observer.observe(canvas);
+
                         });
                     });
                 }
