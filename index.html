@@ -2,323 +2,290 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <link href="./img/favicon.ico" rel="icon">
-    <link href="./img/favicon.ico" rel="apple-touch-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lancement Galilée Commerce</title>
-    <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <link href="./img/favicon.ico" rel="icon">
+  <link href="./img/favicon.ico" rel="apple-touch-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lancement Galilée Commerce</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #05324a;
+      color: #fff;
+      overflow: hidden; /* évite scrollbars */
+    }
 
-        body,
-        html {
-            height: 100%;
-            font-family: 'Poppins', sans-serif;
-            background-color: #05324a;
-            color: #fff;
-            overflow: hidden;
-        }
+    /* --- INTRO (layout desktop) --- */
+    .intro {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      padding: 2rem;
+      transition: opacity 1s ease, transform 1s ease;
+      z-index: 2;
+    }
 
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100vh;
-            padding: 2rem;
-        }
+    .logo, .person {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* Logo Left */
-        .logo {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeInLeft 1.2s ease-in-out forwards;
-        }
+    .logo img { max-width: 480px; width: 100%; height: auto; }
+    .person img { max-width: 600px; width: 100%; height: auto; }
 
-        .logo img {
-            max-width: 280px;
-            width: 100%;
-            height: auto;
-        }
+    .top-text {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      z-index: 10;
+      white-space: nowrap;
+    }
 
-        /* Person Right */
-        .person {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            animation: fadeInRight 1.2s ease-in-out forwards;
-        }
+    .typing {
+      border-right: 3px solid #fff;
+      display: inline-block;
+      overflow: hidden;
+      animation: blink .75s step-end infinite;
+    }
 
-        .person img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-        }
+    .highlight { color: #FFD700; }
 
-        /* Top text */
-        .top-text {
-            position: absolute;
-            top: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            white-space: nowrap;
-            z-index: 10;
-        }
+    .bottom-text {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 1.3rem;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+       z-index:200;
+    }
 
-        .typing {
-            border-right: 3px solid #fff;
-            display: inline-block;
-            overflow: hidden;
-            animation: blink .75s step-end infinite;
-        }
+    /* Counter circle */
+    .counter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      font-size: 4rem;
+      font-weight: 900;
+      color: #fff;
+      opacity: 0;
+      z-index: 999;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at top left, #ffcf00, #ff6b00, #0a66c2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 25px rgba(255,215,0,0.7), 0 0 50px rgba(10,102,194,0.5);
+    }
 
-        .highlight {
-            color: #FFD700;
-            /* jaune premium */
-        }
+    @keyframes counterAnim {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      30% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+      70% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    }
 
-        /* Bottom text */
-        .bottom-text {
-            position: absolute;
-            bottom: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            font-size: 1.3rem;
-            line-height: 1.6;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: #fff; }
+    }
 
-        /* Compteur stylé */
-        .counter {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            font-size: 4rem;
-            font-weight: 900;
-            color: #fff;
-            opacity: 0;
-            z-index: 999;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: radial-gradient(circle at top left, #ffcf00, #ff6b00, #0a66c2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7), 0 0 50px rgba(10, 102, 194, 0.5);
-            animation: none;
-        }
+    /* --- FINAL COMPONENT --- */
+    .final {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background: #05324a;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 2rem;
+      opacity: 0; transform: scale(0.9);
+      transition: opacity 1s ease, transform 1s ease;
+      z-index: 1;
+    }
 
-        /* Glow + zoom */
-        @keyframes counterAnim {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-                box-shadow: 0 0 0 rgba(255, 215, 0, 0.2);
-            }
+    .final.active { opacity: 1; transform: scale(1); z-index: 10; }
 
-            30% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.3);
-                box-shadow: 0 0 35px rgba(255, 215, 0, 0.8), 0 0 70px rgba(10, 102, 194, 0.7);
-            }
+    .final h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 1.2rem; color: #fff; }
+    .final p { font-size: 1.8rem; color: #FFD700; font-weight: 600; margin-bottom: 1.6rem; }
 
-            70% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
+    .final .card {
+      margin-top: 0.8rem; color: white;
+      padding: 1rem 2rem; border-radius: 20px; 
+      font-size: 1.2rem; font-weight: 600; display: inline-block;
+      animation: bounceIn 1s ease forwards;
+    }
+.final .card img {
+    max-width:280px
+}
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
 
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-        }
+    /* --- RESPONSIVE: REMISE COMPORTEMENT MOBILE EXACTEMENT COMME AVANT --- */
+    @media (max-width: 1024px) {
+      .intro {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 6rem;
+      }
 
+      .logo, .person {
+        margin: 1rem 0;
+      }
 
-        /* Animations */
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100px);
-            }
+      /* REPRIS: person plus grand et descendu (bottom: 90px) */
+      .person img {
+        max-width: 450px !important;
+        width: auto;
+        position: relative;
+        bottom: 90px;
+        z-index:100;
+      }
 
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+      /* logo plus petit */
+      .logo img {
+        max-width: 180px !important;
+        width: auto;
+         position: relative;
+         top:84px;
+      }
+    }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
+    @media (max-width: 600px) {
+      .logo img { max-width: 180px !important; width: auto; }
+      .person img {
+        max-width: 220px;
+        margin-bottom: 120px;
+        position: static; /* évite chevauchement excessif sur très petits écrans */
+      }
 
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+      .top-text { font-size: 1.3rem; top: 2%; }
+      .bottom-text { font-size: 1rem; bottom: 3%; }
+      .counter { font-size: 4rem; }
+      .final h1 { font-size: 1.4rem; }
+      .final p { font-size: 1rem; }
+    }
 
-        @keyframes blink {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: #fff;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding-top: 6rem;
-            }
-
-            .logo,
-            .person {
-                margin: 1rem 0;
-            }
-
-            .person img {
-                max-width: 300px;
-                margin-bottom: 120px
-            }
-        }
-
-        @media (max-width: 600px) {
-            .logo img {
-                max-width: 180px;
-            }
-
-            .person img {
-                max-width: 220px;
-                margin-bottom: 120px
-            }
-
-            .top-text {
-                font-size: 1.3rem;
-                top: 2%;
-            }
-
-            .bottom-text {
-                font-size: 1rem;
-                bottom: 3%;
-            }
-
-            .counter {
-                font-size: 4rem;
-            }
-        }
-    </style>
+    .final.exit {
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity 1s ease, transform 1s ease;
+}
+  </style>
 </head>
 
 <body>
-    <!-- Animated Title -->
-    <div class="top-text">
-        <span class="typing" id="typing-text"></span>
+  <!-- Intro -->
+  <div class="intro" id="intro">
+    <div class="top-text"><span class="typing" id="typing-text"></span></div>
+
+    <div class="logo">
+      <img src="./img/IMG-20250919-WA0003.jpg" alt="Logo">
     </div>
 
-    <!-- Logo + Person -->
-    <div class="container">
-        <div class="logo">
-            <img src="./img/IMG-20250919-WA0003.jpg" alt="Logo">
-        </div>
-        <div class="person">
-            <img src="./img/IMG-20250919-WA0002_-removebg-preview.png" alt="Person">
-        </div>
+    <div class="person">
+      <img src="./img/IMG-20250919-WA0002_-removebg-preview.png" alt="Person">
     </div>
 
-    <!-- Bottom text -->
     <div class="bottom-text" id="bottom-text">
-        <p>Nous réinventons les solutions digitales du commerce.</p>
-        <p><strong>www.galileecommerce.com</strong></p>
+      <p>Nous réinventons les solutions digitales du commerce.</p>
+      <p><strong>www.galileecommerce.com</strong></p>
     </div>
+  </div>
 
-    <!-- Counter -->
-    <div class="counter" id="counter"></div>
+  <!-- Counter -->
+  <div class="counter" id="counter"></div>
 
-    <!-- JS -->
-    <script>
-        const texts = ["GALILEECOMMERCE.COM", "C'EST PARTI !"];
-        let count = 0;
-        let index = 0;
-        let currentText = '';
-        let letter = '';
-        const typingElement = document.getElementById("typing-text");
-        const bottomText = document.getElementById("bottom-text");
-        const counterEl = document.getElementById("counter");
+  <!-- Final Component -->
+  <div class="final" id="final">
+    <h1>Nous réinventons les solutions digitales du commerce</h1>
+    <p>Des solutions pour l’acheteur, des solutions pour le vendeur.</p>
+    <div class="card"><img src="./img/IMG-20250919-WA0003.jpg" alt="Logo"></div>
+  </div>
 
-        function type() {
-            if (count === texts.length) return launchSequence();
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
+  <script>
+    const texts = ["GALILEECOMMERCE.COM","C'EST PARTI !"];
+    let count = 0, index = 0, currentText = '', letter = '';
+    const typingElement = document.getElementById("typing-text");
+    const bottomText = document.getElementById("bottom-text");
+    const counterEl = document.getElementById("counter");
+    const intro = document.getElementById("intro");
+    const final = document.getElementById("final");
 
-            // Jaune uniquement pour "C'EST PARTI !"
-            if (currentText === "C'EST PARTI !") {
-                typingElement.innerHTML = `<span class="highlight">${letter}</span>`;
-            } else {
-                typingElement.textContent = letter;
-            }
+    function type() {
+      if (count === texts.length) return launchSequence();
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
 
-            if (letter.length === currentText.length) {
-                count++;
-                index = 0;
-                setTimeout(type, 1500);
-            } else {
-                setTimeout(type, 120);
-            }
+      if (currentText === "C'EST PARTI !") {
+        typingElement.innerHTML = `<span class="highlight">${letter}</span>`;
+      } else {
+        typingElement.textContent = letter;
+      }
+
+      if (letter.length === currentText.length) {
+        count++; index = 0;
+        setTimeout(type, 1500);
+      } else {
+        setTimeout(type, 120);
+      }
+    }
+
+    function launchSequence() {
+      bottomText.style.opacity = "1";
+      setTimeout(() => startCounter(), 2000);
+    }
+
+    function startCounter() {
+      let num = 1;
+      function showNum() {
+        if (num > 3) {
+          // transition d'effacement puis afficher final
+          intro.style.opacity = "0";
+          intro.style.transform = "translateY(-50px)";
+          setTimeout(() => { intro.style.display = "none"; final.classList.add("active"); }, 1000);
+          // 🔥 après 5s on lance l'animation de sortie
+        setTimeout(() => {
+        final.classList.add("exit");
+        setTimeout(() => {
+            window.location.href = "message.html";
+        }, 1200); // délai de fin de transition
+        }, 5000);
+          return;
         }
+        counterEl.textContent = num;
+        counterEl.style.animation = "none";
+        counterEl.offsetHeight; // reset
+        counterEl.style.animation = "counterAnim 1.2s ease-in-out forwards";
+        num++;
+        setTimeout(showNum, 1500);
+      }
+      showNum();
+    }
 
-        function launchSequence() {
-            // Montrer le texte bas
-            bottomText.style.opacity = "1";
-
-            // Lancer compteur après un petit délai
-            setTimeout(() => {
-                startCounter();
-            }, 2000);
-        }
-
-        function startCounter() {
-            let num = 1;
-            function showNum() {
-                if (num > 3) {
-                    // Redirection après le 3
-                    window.location.href = "message.html";
-                    return;
-                }
-                counterEl.textContent = num;
-                counterEl.style.animation = "none";
-                counterEl.offsetHeight; // reset animation
-                counterEl.style.animation = "counterAnim 1.2s ease-in-out forwards";
-                num++;
-                setTimeout(showNum, 1500);
-            }
-            showNum();
-        }
-
-        type();
-    </script>
+    // démarrer la saisie
+    type();
+  </script>
 </body>
 
 </html>

@@ -13,19 +13,58 @@
             padding: 0;
             box-sizing: border-box;
         }
- 
 
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: #05324a ;
-            color: white !important;
+            background: linear-gradient(135deg, #fdfdfd, #f5f7fa);
+            color: #333;
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
-             height: 100vh !important;
-             width:100% !important;
+            min-height: 100vh;
         }
 
+        /* ✅ blobs en arrière-plan */
+        .background-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+
+        .blob1 {
+            background: #0a66c2;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .blob2 {
+            background: #6ec1e4;
+            bottom: -120px;
+            right: -120px;
+            animation-delay: 5s;
+        }
+
+        .blob3 {
+            background: #a3d5ff;
+            top: 40%;
+            left: 70%;
+            animation-delay: 10s;
+        }
 
         @keyframes float {
             0% {
@@ -55,10 +94,10 @@
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 20px;
-             color:white !important;
+            background: linear-gradient(90deg, #0a2e4e, #0a66c2, #00d4ff);
             background-size: 200% auto;
             -webkit-background-clip: text;
-            
+            -webkit-text-fill-color: transparent;
             animation: shine 6s linear infinite;
             opacity: 0;
             transform: translateY(-40px);
@@ -78,19 +117,14 @@
         p {
             max-width: 900px;
             font-size: clamp(0.9rem, 2.5vw, 1.15rem);
-            color:white;
+            color: #333;
             margin: 20px auto;
             padding: 0 10px;
             opacity: 0;
             transform: translateY(40px);
             transition: all 1.2s ease;
         }
-            #features{
-            background: linear-gradient(135deg, #fdfdfdb4, #f5f7fa) !important;
-            padding:5px;
-            border-radius:5px;
-            width:90%;
-            }
+
         .features {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -98,7 +132,6 @@
             margin-top: 40px;
             width: 100%;
             max-width: 1200px;
-           
         }
 
         .card {
@@ -132,15 +165,8 @@
         .card h3 {
             font-size: clamp(0.85rem, 2.5vw, 1.1rem);
             font-weight: 600;
-            color:black !important;
         }
-@media (max-width: 1024px){
-    .card h3 {
-            font-size: 13px !important;
-            font-weight: 300;
-            color:black !important;
-        } 
-}
+
         .cta {
             margin-top: 40px;
             display: inline-block;
@@ -171,21 +197,28 @@
 
 <body>
     <!-- ✅ Background premium -->
-
-
-    <section>
-        <h1 class="reveal">LANCEMENT DES ÉVÈNEMENTS PHARES DE GALILEECOMMERCE.COM</h1>
-
-        <p class="reveal">
-Galileecommerce.com a lancé le 15 septembre 2025 une série d’actions nommées <strong>« Les évènements phares 2025 de galileecomerce.com »</strong> pour mettre en avant les étapes précédant le début des ventes sur sa plateforme en ligne, tout en présentant les concepts révolutionnaires qui repoussent les limites de l’e-commerce. Précédemment (au cours de ces deux dernières années), les efforts mobilisés pour la construction de son modèle technologique ont produit des résultats célébrant le partage interculturel et les petites victoires du quotidien, s'inscrivant dans la ligne du message phare « Nous créons des solutions digitales pour le commerce »... des solutions digitales pour l’acheteur, des solutions digitales pour le vendeur. Outre ces déclarations, « Décuplez vos performances » est l’accroche voulue pour éditer un ton mi- fantastique, mi- réaliste, soulignant les liens entre l’humain, le digital, le commerce, encore et toujours le digital, propulsés par  
-            <a href="https://www.galileecommerce.com" target="_blank">www.galileecommerce.com</a>.
-        </p>
     <div class="background-blur">
         <div class="blob blob1"></div>
         <div class="blob blob2"></div>
         <div class="blob blob3"></div>
     </div>
-    <div id="features">
+
+    <section>
+        <h1 class="reveal">LANCEMENT DES ÉVÈNEMENTS PHARES DE GALILEECOMMERCE.COM</h1>
+
+        <p class="reveal">
+            Galileecommerce.com a lancé le 15 septembre 2025 une série d’actions nommées
+            « Les évènements phares 2025 de galileecommerce.com » pour mettre en avant
+            les étapes précédant le début des ventes sur sa plateforme en ligne, tout en
+            présentant les concepts révolutionnaires qui repoussent les limites de l’e-commerce.
+            Précédemment, les efforts mobilisés pour la construction de son modèle technologique
+            ont produit des résultats célébrant le partage interculturel et les petites victoires
+            du quotidien. « Nous créons des solutions digitales pour le commerce »...
+            « Décuplez vos performances » souligne les liens entre l’humain et le digital,
+            encore et toujours propulsés par
+            <a href="https://www.galileecommerce.com" target="_blank">www.galileecommerce.com</a>.
+        </p>
+
         <div class="features">
             <div class="card reveal">
                 <!-- 🚀 SVG Icône Innovation -->
@@ -227,7 +260,6 @@ Galileecommerce.com a lancé le 15 septembre 2025 une série d’actions nommée
         </div>
 
         <a href="esp.html" class="cta reveal">Cliquez ici pour en savoir plus</a>
-        </div>
     </section>
 
     <script>
@@ -252,3 +284,16 @@ Galileecommerce.com a lancé le 15 septembre 2025 une série d’actions nommée
 </body>
 
 </html>
+
+
+
+window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+            if (scrollTop >= docHeight * 0.2) { // 80% du scroll total
+                downloadLink.classList.add("show");
+            } else {
+                downloadLink.classList.remove("show");
+            }
+        });

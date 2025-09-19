@@ -11,7 +11,7 @@
         body {
             margin: 0;
             font-family: sans-serif;
-            background-color: #05324a;
+             background: linear-gradient(135deg, #fdfdfdb4, #f5f7fa) !important;
         }
 
         #pdf-container {
@@ -94,20 +94,22 @@
 
         #downloadLink {
             position: fixed;
-            bottom: -100px;
+            bottom: 0;
+            /* s’affiche au bas de l’écran */
+            opacity: 1;
+            pointer-events: auto;
             /* caché par défaut */
             left: 0;
             width: 100%;
             /* pleine largeur */
-            background: linear-gradient(135deg, #28a745, #20c997);
+            background: #ff3e3f;
             color: #fff;
             text-align: center;
             padding: 6px 5px;
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-            opacity: 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2); 
             pointer-events: none;
             transition: all 0.6s ease;
             display: flex;
@@ -116,12 +118,7 @@
             gap: 12px;
         }
 
-        #downloadLink.show {
-            bottom: 0;
-            /* s’affiche au bas de l’écran */
-            opacity: 1;
-            pointer-events: auto;
-        }
+      
 
         #downloadLink:hover {
             background: linear-gradient(135deg, #218838, #17a589);
@@ -158,6 +155,7 @@
 </head>
 
 <body>
+    
     <div id="pdf-container"></div>
     <a id="downloadLink" href="#" download>
         📥 Téléchargez les étapes phares du lancement de galileecommerce.com
@@ -165,14 +163,14 @@
     </a>
 
     <!-- Bouton retour haut -->
-    <div id="backTop">
+    <div id="backTop" style="opacity:0">
         <svg>
             <circle cx="30" cy="30" r="45%" />
         </svg>
         <span class="arrow">↑</span>
 
     </div>
-
+ 
     <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
     <script>
@@ -186,7 +184,7 @@
         const pdfContainer = document.getElementById("pdf-container");
 
         // ✅ Définir les pages que tu veux afficher
-        const pagesToShow = [10, 11, 12, 13]; // Mets ici les numéros de pages que tu veux
+        const pagesToShow = [10, 13]; // Mets ici les numéros de pages que tu veux
 
         pdfjsLib.getDocument({ data: pdfData }).promise.then(function (pdf) {
             pagesToShow.forEach(pageNum => {
@@ -248,16 +246,7 @@
 
         const downloadLink = document.getElementById("downloadLink");
 
-        window.addEventListener("scroll", () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-            if (scrollTop >= docHeight * 0.8) { // 80% du scroll total
-                downloadLink.classList.add("show");
-            } else {
-                downloadLink.classList.remove("show");
-            }
-        });
+        
     </script>
 
     <script>
