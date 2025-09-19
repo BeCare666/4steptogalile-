@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="./img/favicon.ico" rel="icon">
+    <link href="./img/favicon.ico" rel="apple-touch-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galiléecommerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #05324a;
+            overflow: hidden;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .screen.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .background {
+            background: #05324a url("./img/let's_goo.png") no-repeat center;
+            background-size: contain;
+        }
+
+        .text-screen {
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .text-screen h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 30px;
+        }
+
+        .text-screen img {
+            max-width: 420px;
+            height: auto;
+        }
+
+        /* ✅ Images grandes et responsives */
+        .image-screen img,
+        .final-screen img {
+            max-width: 90vw;
+            /* largeur max relative à l’écran */
+            max-height: 85vh;
+            /* hauteur max relative à l’écran */
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .final-screen {
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+
+        .final-screen button {
+            margin-top: 20px;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            background-color: #ffffff;
+            color: #05324a;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .final-screen button:hover {
+            background-color: #05324a;
+            color: white;
+            border: 1px solid white;
+        }
+
+        /* Responsive mobile */
+        @media (max-width: 768px) {
+            .text-screen h1 {
+                font-size: 1.1rem;
+            }
+
+            .text-screen img {
+                max-width: 450px;
+            }
+
+            .image-screen img,
+            .final-screen img {
+                max-width: 95vw;
+                max-height: 70vh;
+            }
+
+            .final-screen button {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Écrans -->
+    <div class="screen background active"></div>
+ <!-- Écrans 
+    <div class="screen text-screen">
+        <h1>Lancement des évènements phares de galileecommerce.com</h1>
+        <img src="./img/Image1.png" alt="Logo Galiléecommerce">
+    </div>
+
+    <div class="screen image-screen">
+        <img src="./img/allons.jpg" alt="Évènement 1">
+    </div>
+-->
+    <div class="screen final-screen">
+        <img id="finalImage" src="./img/new_steps.png" alt="Évènement 2">
+        <button id="moreBtn">CLIQUER ICI POUR EN SAVOIR PLUS</button>
+    </div>
+
+    <script>
+        const screens = document.querySelectorAll('.screen');
+        let index = 0;
+
+        function showNextScreen() {
+            if (index < screens.length) {
+                if (index > 0) {
+                    screens[index - 1].classList.remove('active');
+                }
+                screens[index].classList.add('active');
+                index++;
+                if (index < screens.length) {
+                    setTimeout(showNextScreen, 4000);
+                }
+            }
+        }
+
+        setTimeout(showNextScreen, 3000);
+
+        // ✅ Bouton "En savoir plus" qui change l'image avec animation fluide
+        const btn = document.getElementById('moreBtn');
+        const finalImg = document.getElementById('finalImage');
+        let clickCount = 0; // compteur de clics
+
+        btn.addEventListener('click', () => {
+            clickCount++;
+
+            if (clickCount === 1) {
+                // 👉 Premier clic : fade out + remplacement image
+                finalImg.style.opacity = "0";
+                setTimeout(() => {
+                    finalImg.src = "./img/message_lancement.png"; // mets ta nouvelle image ici
+                    finalImg.style.opacity = "1"; // fade in
+                }, 1000); // durée du fade out
+            } else if (clickCount === 2) {
+                // 👉 Deuxième clic : redirection
+                window.location.href = "esp.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

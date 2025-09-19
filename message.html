@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancement Galileecommerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #fdfdfd, #f5f7fa);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ✅ blobs en arrière-plan */
+        .background-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+
+        .blob1 {
+            background: #0a66c2;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .blob2 {
+            background: #6ec1e4;
+            bottom: -120px;
+            right: -120px;
+            animation-delay: 5s;
+        }
+
+        .blob3 {
+            background: #a3d5ff;
+            top: 40%;
+            left: 70%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(50px, -60px) scale(1.1);
+            }
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ✅ Titre premium */
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #0a2e4e, #0a66c2, #00d4ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 6s linear infinite;
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: all 1s ease;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        p {
+            max-width: 900px;
+            font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+            color: #333;
+            margin: 20px auto;
+            padding: 0 10px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 10px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card svg {
+            width: clamp(28px, 6vw, 50px);
+            height: clamp(28px, 6vw, 50px);
+            margin-bottom: 10px;
+            color: #0a66c2;
+            flex-shrink: 0;
+        }
+
+        .card h3 {
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+        }
+
+        .cta {
+            margin-top: 40px;
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0a66c2;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .cta:hover {
+            background: #084d91;
+            transform: scale(1.05);
+        }
+
+        /* ✅ Quand visible */
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ✅ Background premium -->
+    <div class="background-blur">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
+
+    <section>
+        <h1 class="reveal">LANCEMENT DES ÉVÈNEMENTS PHARES DE GALILEECOMMERCE.COM</h1>
+
+        <p class="reveal">
+            Galileecommerce.com a lancé le 15 septembre 2025 une série d’actions nommées
+            « Les évènements phares 2025 de galileecommerce.com » pour mettre en avant
+            les étapes précédant le début des ventes sur sa plateforme en ligne, tout en
+            présentant les concepts révolutionnaires qui repoussent les limites de l’e-commerce.
+            Précédemment, les efforts mobilisés pour la construction de son modèle technologique
+            ont produit des résultats célébrant le partage interculturel et les petites victoires
+            du quotidien. « Nous créons des solutions digitales pour le commerce »...
+            « Décuplez vos performances » souligne les liens entre l’humain et le digital,
+            encore et toujours propulsés par
+            <a href="https://www.galileecommerce.com" target="_blank">www.galileecommerce.com</a>.
+        </p>
+
+        <div class="features">
+            <div class="card reveal">
+                <!-- 🚀 SVG Icône Innovation -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9.75 17L8 21l4-1.25L16 21l-1.75-4M12 3v9m0 0l3.5-3.5M12 12L8.5 8.5" />
+                </svg>
+                <h3>Innovation</h3>
+            </div>
+
+            <div class="card reveal">
+                <!-- 🌍 SVG Icône Ouverture -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9S16.97 3 12 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3.6 9h16.8M3.6 15h16.8M12 3a15.3 15.3 0 010 18" />
+                </svg>
+                <h3>Ouverture</h3>
+            </div>
+
+            <div class="card reveal">
+                <!-- 👥 SVG Icône Communauté -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <h3>Communauté</h3>
+            </div>
+
+            <div class="card reveal">
+                <!-- ⚡ SVG Icône Performance -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <h3>Performance</h3>
+            </div>
+        </div>
+
+        <a href="esp.html" class="cta reveal">Cliquez ici pour en savoir plus</a>
+    </section>
+
+    <script>
+        // ✅ Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains("card")) {
+                        const cards = document.querySelectorAll(".card");
+                        cards.forEach((card, i) => {
+                            setTimeout(() => card.classList.add("show"), i * 200);
+                        });
+                    } else {
+                        entry.target.classList.add("show");
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

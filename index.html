@@ -6,8 +6,9 @@
     <link href="./img/favicon.ico" rel="icon">
     <link href="./img/favicon.ico" rel="apple-touch-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galiléecommerce</title>
+    <title>Lancement Galilée Commerce</title>
     <style>
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -17,173 +18,304 @@
         body,
         html {
             height: 100%;
-            width: 100%;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #05324a;
+            color: #fff;
             overflow: hidden;
         }
 
-        .screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 100%;
+        .container {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            height: 100vh;
+            padding: 2rem;
+        }
+
+        /* Logo Left */
+        .logo {
+            flex: 1;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            animation: fadeInLeft 1.2s ease-in-out forwards;
+        }
+
+        .logo img {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Person Right */
+        .person {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            animation: fadeInRight 1.2s ease-in-out forwards;
+        }
+
+        .person img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Top text */
+        .top-text {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .typing {
+            border-right: 3px solid #fff;
+            display: inline-block;
+            overflow: hidden;
+            animation: blink .75s step-end infinite;
+        }
+
+        .highlight {
+            color: #FFD700;
+            /* jaune premium */
+        }
+
+        /* Bottom text */
+        .bottom-text {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.3rem;
+            line-height: 1.6;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
 
-        .screen.active {
-            opacity: 1;
-            z-index: 1;
+        /* Compteur stylé */
+        .counter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            font-size: 4rem;
+            font-weight: 900;
+            color: #fff;
+            opacity: 0;
+            z-index: 999;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at top left, #ffcf00, #ff6b00, #0a66c2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7), 0 0 50px rgba(10, 102, 194, 0.5);
+            animation: none;
         }
 
-        .background {
-            background: #05324a url("./img/let's_goo.png") no-repeat center;
-            background-size: contain;
-        }
-
-        .text-screen {
-            flex-direction: column;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .text-screen h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 30px;
-        }
-
-        .text-screen img {
-            max-width: 420px;
-            height: auto;
-        }
-
-        /* ✅ Images grandes et responsives */
-        .image-screen img,
-        .final-screen img {
-            max-width: 90vw;
-            /* largeur max relative à l’écran */
-            max-height: 85vh;
-            /* hauteur max relative à l’écran */
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .final-screen {
-            flex-direction: column;
-            color: white;
-            text-align: center;
-        }
-
-        .final-screen button {
-            margin-top: 20px;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            background-color: #ffffff;
-            color: #05324a;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .final-screen button:hover {
-            background-color: #05324a;
-            color: white;
-            border: 1px solid white;
-        }
-
-        /* Responsive mobile */
-        @media (max-width: 768px) {
-            .text-screen h1 {
-                font-size: 1.1rem;
+        /* Glow + zoom */
+        @keyframes counterAnim {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+                box-shadow: 0 0 0 rgba(255, 215, 0, 0.2);
             }
 
-            .text-screen img {
-                max-width: 450px;
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.3);
+                box-shadow: 0 0 35px rgba(255, 215, 0, 0.8), 0 0 70px rgba(10, 102, 194, 0.7);
             }
 
-            .image-screen img,
-            .final-screen img {
-                max-width: 95vw;
-                max-height: 70vh;
+            70% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
             }
 
-            .final-screen button {
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+        }
+
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #fff;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 6rem;
+            }
+
+            .logo,
+            .person {
+                margin: 1rem 0;
+            }
+
+            .person img {
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo img {
+                max-width: 180px;
+            }
+
+            .person img {
+                max-width: 220px;
+            }
+
+            .top-text {
+                font-size: 1.3rem;
+                top: 2%;
+            }
+
+            .bottom-text {
                 font-size: 1rem;
-                padding: 12px 20px;
+                bottom: 3%;
+            }
+
+            .counter {
+                font-size: 4rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Écrans -->
-    <div class="screen background active"></div>
- <!-- Écrans 
-    <div class="screen text-screen">
-        <h1>Lancement des évènements phares de galileecommerce.com</h1>
-        <img src="./img/Image1.png" alt="Logo Galiléecommerce">
+    <!-- Animated Title -->
+    <div class="top-text">
+        <span class="typing" id="typing-text"></span>
     </div>
 
-    <div class="screen image-screen">
-        <img src="./img/allons.jpg" alt="Évènement 1">
-    </div>
--->
-    <div class="screen final-screen">
-        <img id="finalImage" src="./img/new_steps.png" alt="Évènement 2">
-        <button id="moreBtn">CLIQUER ICI POUR EN SAVOIR PLUS</button>
+    <!-- Logo + Person -->
+    <div class="container">
+        <div class="logo">
+            <img src="./img/IMG-20250919-WA0003.jpg" alt="Logo">
+        </div>
+        <div class="person">
+            <img src="./img/IMG-20250919-WA0002_-removebg-preview.png" alt="Person">
+        </div>
     </div>
 
+    <!-- Bottom text -->
+    <div class="bottom-text" id="bottom-text">
+        <p>Nous réinventons les solutions digitales du commerce.</p>
+        <p><strong>www.galileecommerce.com</strong></p>
+    </div>
+
+    <!-- Counter -->
+    <div class="counter" id="counter"></div>
+
+    <!-- JS -->
     <script>
-        const screens = document.querySelectorAll('.screen');
+        const texts = ["GALILEECOMMERCE.COM", "C'EST PARTI !"];
+        let count = 0;
         let index = 0;
+        let currentText = '';
+        let letter = '';
+        const typingElement = document.getElementById("typing-text");
+        const bottomText = document.getElementById("bottom-text");
+        const counterEl = document.getElementById("counter");
 
-        function showNextScreen() {
-            if (index < screens.length) {
-                if (index > 0) {
-                    screens[index - 1].classList.remove('active');
-                }
-                screens[index].classList.add('active');
-                index++;
-                if (index < screens.length) {
-                    setTimeout(showNextScreen, 4000);
-                }
+        function type() {
+            if (count === texts.length) return launchSequence();
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+
+            // Jaune uniquement pour "C'EST PARTI !"
+            if (currentText === "C'EST PARTI !") {
+                typingElement.innerHTML = `<span class="highlight">${letter}</span>`;
+            } else {
+                typingElement.textContent = letter;
+            }
+
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 1500);
+            } else {
+                setTimeout(type, 120);
             }
         }
 
-        setTimeout(showNextScreen, 3000);
+        function launchSequence() {
+            // Montrer le texte bas
+            bottomText.style.opacity = "1";
 
-        // ✅ Bouton "En savoir plus" qui change l'image avec animation fluide
-        const btn = document.getElementById('moreBtn');
-        const finalImg = document.getElementById('finalImage');
-        let clickCount = 0; // compteur de clics
+            // Lancer compteur après un petit délai
+            setTimeout(() => {
+                startCounter();
+            }, 2000);
+        }
 
-        btn.addEventListener('click', () => {
-            clickCount++;
-
-            if (clickCount === 1) {
-                // 👉 Premier clic : fade out + remplacement image
-                finalImg.style.opacity = "0";
-                setTimeout(() => {
-                    finalImg.src = "./img/message_lancement.png"; // mets ta nouvelle image ici
-                    finalImg.style.opacity = "1"; // fade in
-                }, 1000); // durée du fade out
-            } else if (clickCount === 2) {
-                // 👉 Deuxième clic : redirection
-                window.location.href = "esp.html";
+        function startCounter() {
+            let num = 1;
+            function showNum() {
+                if (num > 3) {
+                    // Redirection après le 3
+                    window.location.href = "message.html";
+                    return;
+                }
+                counterEl.textContent = num;
+                counterEl.style.animation = "none";
+                counterEl.offsetHeight; // reset animation
+                counterEl.style.animation = "counterAnim 1.2s ease-in-out forwards";
+                num++;
+                setTimeout(showNum, 1500);
             }
-        });
+            showNum();
+        }
+
+        type();
     </script>
 </body>
 
